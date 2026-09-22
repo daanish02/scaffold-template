@@ -9,5 +9,3 @@ permissions:
 jobs:
   deploy:
     uses: daanish02/scaffold-core/.github/workflows/deploy-pages.yml@main
-    with:
-      node-version: "24"
