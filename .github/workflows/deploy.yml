@@ -1,0 +1,7 @@
+name: Deploy
+on:
+  push:
+    branches: [main]
+jobs:
+  deploy:
+    uses: daanish02/scaffold-core/.github/workflows/deploy-pages.yml@main
