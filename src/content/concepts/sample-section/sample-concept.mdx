@@ -41,17 +41,13 @@ $$
 
 For a 2x2 matrix, eigenvalues solve the characteristic equation $\lambda^2 - (a+d)\lambda + (ad - bc) = 0$.
 
-<CodeCell lang="python">
-
-```python
-import numpy as np
+export const sampleCode = `import numpy as np
 
 A = np.array([[2, 0], [0, 1]])
 values, vectors = np.linalg.eig(A)
-print(values)
-```
+print(values)`;
 
-</CodeCell>
+<CodeCell lang="python">{sampleCode}</CodeCell>
 
 ## Common pitfalls
 
