@@ -2,34 +2,24 @@
 import { getCollection } from "astro:content";
 import ConceptLayout from "../../layouts/ConceptLayout.astro";
 import ConceptLink from "@daanish02/scaffold-core/components/content/ConceptLink.astro";
+import {
+  getConceptStaticPaths,
+  buildSidebarGroups,
+  getConnectsToIds,
+} from "@daanish02/scaffold-core/astro/concept-page.ts";
 
 export async function getStaticPaths() {
   const concepts = await getCollection("concepts");
-  return concepts.map((entry) => {
-    const [section, concept] = entry.slug.split("/");
-    return { params: { section, concept }, props: { entry } };
-  });
+  return getConceptStaticPaths(concepts);
 }
 
 const { entry } = Astro.props;
 const { Content } = await entry.render();
-const { title, difficulty, status, prerequisites, related } = entry.data;
-const connects = [...prerequisites, ...related];
+const { title, difficulty, status } = entry.data;
+const connects = getConnectsToIds(entry);
 
-const base = import.meta.env.BASE_URL.replace(/\/?$/, "/");
 const allConcepts = await getCollection("concepts");
-const sidebarGroups = [
-  {
-    label: entry.data.section,
-    links: allConcepts
-      .filter((c) => c.data.section === entry.data.section)
-      .map((c) => ({
-        href: `${base}${c.slug}/`,
-        label: c.data.title,
-        current: c.slug === entry.slug,
-      })),
-  },
-];
+const sidebarGroups = buildSidebarGroups(entry, allConcepts, import.meta.env.BASE_URL);
 ---
 
 <ConceptLayout title={title} kb={entry.data.kb} sidebarGroups={sidebarGroups}>

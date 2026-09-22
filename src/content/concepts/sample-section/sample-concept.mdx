@@ -16,8 +16,8 @@ description: "Placeholder concept page demonstrating every scaffold-core compone
 
 import Callout from "@daanish02/scaffold-core/components/content/Callout.astro";
 import CodeCell from "@daanish02/scaffold-core/components/content/CodeCell.astro";
-import LiveTransformViz from "../../../components/LiveTransformViz.astro";
-import LiveSelfCheck from "../../../components/LiveSelfCheck.astro";
+import TransformViz from "@daanish02/scaffold-core/components/interactive/TransformViz.astro";
+import SelfCheck from "@daanish02/scaffold-core/components/interactive/SelfCheck.astro";
 
 > **This is sample content.** Replace or delete this file before publishing a real KB — it exists to show every `scaffold-core` component wired up in one page, per the [AUTHORING.md](https://github.com/daanish02/scaffold-core/blob/main/docs/AUTHORING.md) template.
 
@@ -29,7 +29,7 @@ A 2x2 matrix can be read as an instruction for moving every point in the plane a
 
 export const initialMatrix = { a: 2, b: 0, c: 0, d: 1 };
 
-<LiveTransformViz initial={initialMatrix} />
+<TransformViz initial={initialMatrix} />
 
 ## Formal definition
 
@@ -74,4 +74,4 @@ export const questions = [
   },
 ];
 
-<LiveSelfCheck questions={questions} />
+<SelfCheck questions={questions} />
