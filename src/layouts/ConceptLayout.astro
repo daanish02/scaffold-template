@@ -8,8 +8,13 @@ import "@daanish02/scaffold-core/styles/base.css";
 export interface Props {
   title: string;
   kb: string;
+  sidebarGroups?: import("@daanish02/scaffold-core/components/layout/Sidebar.astro").SidebarGroup[];
 }
-const { title, kb } = Astro.props;
+const {
+  title,
+  kb,
+  sidebarGroups = [{ label: kb, links: [{ href: "#", label: title, current: true }] }],
+} = Astro.props;
 ---
 
 <html lang="en">
@@ -20,10 +25,14 @@ const { title, kb } = Astro.props;
   </head>
   <body>
     <Header kb={kb} />
-    <Sidebar groups={[{ label: kb, links: [{ href: "#", label: title, current: true }] }]} />
-    <main class="content">
-      <slot />
-    </main>
+    <div class="shell">
+      <Sidebar groups={sidebarGroups} />
+      <main>
+        <div class="content-col">
+          <slot />
+        </div>
+      </main>
+    </div>
     <Footer currentKb={kb} />
   </body>
 </html>

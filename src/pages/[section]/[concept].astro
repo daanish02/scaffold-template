@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import ConceptLayout from "../../layouts/ConceptLayout.astro";
+import ConceptLink from "@daanish02/scaffold-core/components/content/ConceptLink.astro";
 
 export async function getStaticPaths() {
   const concepts = await getCollection("concepts");
@@ -12,8 +13,44 @@ export async function getStaticPaths() {
 
 const { entry } = Astro.props;
 const { Content } = await entry.render();
+const { title, difficulty, status, prerequisites, related } = entry.data;
+const connects = [...prerequisites, ...related];
+
+const base = import.meta.env.BASE_URL.replace(/\/?$/, "/");
+const allConcepts = await getCollection("concepts");
+const sidebarGroups = [
+  {
+    label: entry.data.section,
+    links: allConcepts
+      .filter((c) => c.data.section === entry.data.section)
+      .map((c) => ({
+        href: `${base}${c.slug}/`,
+        label: c.data.title,
+        current: c.slug === entry.slug,
+      })),
+  },
+];
 ---
 
-<ConceptLayout title={entry.data.title} kb={entry.data.kb}>
-  <Content />
+<ConceptLayout title={title} kb={entry.data.kb} sidebarGroups={sidebarGroups}>
+  <h1 class="page-title">{title}</h1>
+  <div class="meta-row">
+    <span class="pill accent">{difficulty}</span>
+    <span class="pill">{status}</span>
+  </div>
+  {
+    connects.length > 0 && (
+      <div class="prereqs">
+        <span class="prereqs-label">Prerequisites & related</span>
+        <div class="chip-row">
+          {connects.map((id) => (
+            <ConceptLink id={id} />
+          ))}
+        </div>
+      </div>
+    )
+  }
+  <div class="prose">
+    <Content />
+  </div>
 </ConceptLayout>

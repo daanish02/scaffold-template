@@ -1,10 +1,12 @@
 ---
-id: "template:sample-section:sample-concept"
+id: "math:sample-section:sample-concept"
 kb: "math"
 title: "Sample concept (delete me)"
 section: "sample-section"
-prerequisites: []
-related: []
+prerequisites:
+  - "math:linear-algebra:vectors"
+related:
+  - "math:linear-algebra:matrices-as-transformations"
 difficulty: "intro"
 status: "draft"
 hasInteractive: true
@@ -14,7 +16,6 @@ description: "Placeholder concept page demonstrating every scaffold-core compone
 
 import Callout from "@daanish02/scaffold-core/components/content/Callout.astro";
 import CodeCell from "@daanish02/scaffold-core/components/content/CodeCell.astro";
-import ConceptLink from "@daanish02/scaffold-core/components/content/ConceptLink.astro";
 import LiveTransformViz from "../../../components/LiveTransformViz.astro";
 import LiveSelfCheck from "../../../components/LiveSelfCheck.astro";
 
@@ -61,11 +62,6 @@ print(values)
 <Callout label="Common pitfall">
   Eigenvectors are only defined up to scale - any nonzero multiple of an eigenvector is also an eigenvector for the same eigenvalue.
 </Callout>
-
-## Connects to
-
-<ConceptLink id="math:linear-algebra:vectors" />
-<ConceptLink id="math:linear-algebra:matrices-as-transformations" />
 
 ## Self-check
 
