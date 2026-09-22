@@ -3,7 +3,7 @@
 Two levels only, matching `content-schema.ts`: **section** → **concept**. No third level.
 
 ```
-src/content/concepts/
+content/concepts/
   <section>/
     <concept>.mdx
 ```
@@ -18,7 +18,7 @@ A concept's `id` is `kb:section:concept` (e.g. `math:linear-algebra:eigenvectors
 ```
 id: "math:linear-algebra:eigenvectors"
         ^section        ^concept
-     -> src/content/concepts/linear-algebra/eigenvectors.mdx
+     -> content/concepts/linear-algebra/eigenvectors.mdx
 ```
 
 `kb` doesn't appear in the path — it's fixed per-repo (this whole content collection belongs to one `kb`) and only shows up in frontmatter and cross-repo `id`s.

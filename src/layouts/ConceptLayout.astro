@@ -1,0 +1,29 @@
+---
+import Header from "@daanish02/scaffold-core/components/layout/Header.astro";
+import Footer from "@daanish02/scaffold-core/components/layout/Footer.astro";
+import Sidebar from "@daanish02/scaffold-core/components/layout/Sidebar.astro";
+import "@daanish02/scaffold-core/styles/tokens.css";
+import "@daanish02/scaffold-core/styles/base.css";
+
+export interface Props {
+  title: string;
+  kb: string;
+}
+const { title, kb } = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Scaffold: {title}</title>
+  </head>
+  <body>
+    <Header kb={kb} />
+    <Sidebar groups={[{ label: kb, links: [{ href: "#", label: title, current: true }] }]} />
+    <main class="content">
+      <slot />
+    </main>
+    <Footer currentKb={kb} />
+  </body>
+</html>
